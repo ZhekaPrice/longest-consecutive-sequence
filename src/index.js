@@ -3,21 +3,16 @@ module.exports = function longestConsecutiveLength(array) {
     return 0;
   if(array.length == 1)
     return 1;
-
-  let CurrentIndex = 0;
-  let MaxLength = 0, TempMaxLength = 0;
+  let MaxLength = 1, TempMaxLength = 1;
   for(let i = 0; i < array.length; i++)
   {
-    TempMaxLength++;
-    CurrentIndex = array.indexOf(array[i] + 1);
-    while(CurrentIndex != -1)
+    if(array[i] + 1 == array[i+1])
     {
-        TempMaxLength++;
-        if(TempMaxLength > MaxLength)
-            MaxLength = TempMaxLength;
-        CurrentIndex = array.indexOf(array[CurrentIndex] + 1);
-    };
-    TempMaxLength = 0;
+      TempMaxLength++;
+      MaxLength = Math.max(MaxLength,TempMaxLength);
+    }
+    else
+      TempMaxLength = 1;
   };
   return MaxLength;
 }
